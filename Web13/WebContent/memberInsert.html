@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>맴버 인서트 2</title>
+
+<script type="text/javascript">
+	function memberInsert() {
+		var form = document.myForm;
+		form.method="get";
+		form.action="main";
+		form.submit();
+	}
+</script>
+
+</head>
+<body>
+	<form name="myForm">
+		<input type="hidden" name="sign" value="memberInsert">
+		맴버 인서트2 입니다.<br>
+		ID <input name="id"><br>
+		PW <input type="password" name="pw"><br>
+		NAME <input name="name"><br>
+		사용언어<br>
+		JAVA<input type="checkbox" name="subject" value="java"><br>
+		C<input type="checkbox" name="subject" value="c"><br>
+		JSP<input type="checkbox" name="subject" value="jsp"><br>
+		Python<input type="checkbox" name="subject" value="python"><br>
+		<input type="button" onClick='memberInsert()' value="회원가입">
+	</form>
+</body>
+</html>
