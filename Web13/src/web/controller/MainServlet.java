@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.util.Enumeration;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -47,59 +48,75 @@ public class MainServlet extends HttpServlet {
 		String sign=request.getParameter("sign");
 		if(sign==null) {
 			return ;
-		}else if(sign.equals("login")) {//·Î±×ÀÎ Ã³¸®
+		}else if(sign.equals("login")) {//ï¿½Î±ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 			String id=request.getParameter("id");
 			String pw=request.getParameter("pw");
 			
-			PrintWriter out=response.getWriter();
+
 			try {
 				String name=mDao.login(id,pw);
 				
 				if(name!=null) {
 					//login ok
-					out.write(name+"´Ô È¯¿µÇÕ´Ï´Ù");
+					RequestDispatcher disp = request.getRequestDispatcher("login_ok.jsp");
+					request.setAttribute("name", name);
+					disp.forward(request, response);
 				}else {
-					//login fail
-					response.setContentType("text/html;charset=utf-8");
-					out.write("´Ù½Ã ·Î±×ÀÎ ÇØÁÖ¼¼¿ä<br><a href='login.html' >´Ù½Ã ·Î±×ÀÎ ÇÏ±â</a>");
+//					//login fail
+//					response.setContentType("text/html;charset=utf-8");
+					RequestDispatcher disp = request.getRequestDispatcher("login_fail.jsp");
+					disp.forward(request, response);
 				}
 			} catch (MyException e) {
 				// login error
-				out.write(e.getMessage());
+				RequestDispatcher disp = request.getRequestDispatcher("error.jsp");
+				disp.forward(request, response);
 			}
 			
 			
-		}else if(sign.equals("memberInsert")) {//È¸¿ø°¡ÀÔ Ã³¸®
-			System.out.println(1);
-			response.setContentType("text/html;charset=utf-8");
-			PrintWriter out=response.getWriter();
+		}else if(sign.equals("memberInsert")) {//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 			
 			String id=request.getParameter("id");
 			String pw=request.getParameter("pw");
 			String name=request.getParameter("name");
 			String [] all_subject=request.getParameterValues("subject");
 			
-						
 			Member m=new Member(id,pw,name,all_subject);
 			try {
 				mDao.memberInsert(m);
-				out.write("È¸¿ø°¡ÀÔ µÇ¼Ì½À´Ï´Ù");
+				RequestDispatcher disp = request.getRequestDispatcher("memberInsert_ok.jsp");
+				disp.forward(request, response);
 			} catch (MyException e) {
-				out.write(e.getMessage());
+				RequestDispatcher disp = request.getRequestDispatcher("error.jsp");
+				disp.forward(request, response);
 			}			
-		}else if(sign.equals("listMembers")) {//¸ðµç È¸¿ø º¸±â Ã³¸®
+		}else if(sign.equals("listMembers")) {//ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 			try {
 				List<Member> list=mDao.listMembers();
 				//ok
-				response.setContentType("text/html;charset=utf-8");
-				PrintWriter out=response.getWriter();
-				for(Member m:list) {
-					out.append(m.getId()+":"+m.getName()+":"+m.getPw()+"<br>");
-				}
+				RequestDispatcher disp = request.getRequestDispatcher("listMembers_ok.jsp");
+				request.setAttribute("list", list);				
+				disp.forward(request, response);
+				
 			} catch (MyException e) {
 				// fail
-				e.printStackTrace();
+				RequestDispatcher disp = request.getRequestDispatcher("error.jsp");			
+				disp.forward(request, response);
 			}
+		} else if (sign.equals("memberDelete")) {
+			String id = request.getParameter("id");
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out=response.getWriter();
+			try {
+			mDao.deleteMember(id);
+			RequestDispatcher disp = request.getRequestDispatcher("deleteMembers_ok.jsp");		
+			request.setAttribute("id", id);	
+			disp.forward(request, response);
+			} catch (MyException e) {
+				RequestDispatcher disp = request.getRequestDispatcher("error.jsp");		
+				disp.forward(request, response);
+			}
+			
 		}
 	}
 
