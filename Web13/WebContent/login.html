@@ -2,32 +2,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
 <script type="text/javascript">
-	function fn_validate() {
-		var frmLogin = document.frmLogin;
-		alert(frmLogin);
-		var user_id = frmLogin.id.value;
-		var user_pw = frmLogin.pw.value;
-		if((user_id.length==0 || user_id == "") || (user_pw.length == 0 || user_pw == "")) {
-			alert('아이디와 비밀번호는 필수입니다.');
-		} else {
-			frmLogin.method = "post";
-			frmLogin.action = "main";
-			frmLogin.submin();
+	function fn_validate(){
+		var frmLogin=document.frmLogin;
+		//alert(frmLogin);
+		var user_id=frmLogin.id.value;
+		var user_pw=frmLogin.pw.value;
+		if((user_id.length==0 || user_id=="") ||
+				(user_pw.length==0 || user_pw=="")){
+			alert("아이디와 비밀번호는 필수입니다");
+		}else{
+			frmLogin.method="get";
+			frmLogin.action="main";
+			frmLogin.submit();
 		}
 	}
 </script>
-
-<title>로그인창</title>
+<title>Insert title here</title>
 </head>
 <body>
-	login 2 입니다.<br>
-	<form name="frmLogin" action="main" method="post" >
-	<input type="hidden" name="sign" value="login">
-	ID <input name="id"><br>
-	PW <input type="password" name="pw"><br>
-	<input type="button" onClick='fn_validate()' value="login">
+	<form name="frmLogin"  >
+		<input type="hidden" name="sign" value="login">
+		ID <input name="id"><br>
+		PW <input type="password" name="pw"><br>
+		<input type="button" onClick="fn_validate()" value="login">
 	</form>
 </body>
 </html>
