@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>맴버 인서트</title>
+
+<script type="text/javascript">
+	function memberInsert() {
+		var form = document.myForm;
+		form.method="get";
+		form.action="main";
+		form.submit();
+	}
+</script>
+
+</head>
+<body>
+	<form name="myForm">
+		<input type="hidden" name="key" value="memberInsert">
+		회원가입하십시오.<br>
+		ID <input name="id"><br>
+		PW <input type="password" name="pw"><br>
+		NAME <input name="name"><br><br>
+		<input type="button" onClick='memberInsert()' value="회원가입">
+	</form>
+</body>
+</html>
