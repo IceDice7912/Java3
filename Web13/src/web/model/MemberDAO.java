@@ -5,20 +5,38 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import web.util.Member;
 import web.util.MyException;
 
 public class MemberDAO {
 	
+	DataSource dataFactory;
+	
 	public MemberDAO() throws MyException {
-		// 1. µå¶óÀÌ¹ö µî·Ï
+//		// 1. ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½
+//		try {
+//			Class.forName("oracle.jdbc.driver.OracleDriver");
+//			System.out.println("ì˜¤ë¼í´ ë“œë¼ì´ë²„ì— ë¬´ì‚¬íˆ ì ‘ì†í–ˆìŠµë‹ˆë‹¤.");
+//		} catch (ClassNotFoundException e) {			
+//			e.printStackTrace();
+//			throw new MyException("ë“œë¼ì´ë²„ ë“±ë¡ ì˜¤ë¥˜");
+//		}
+		
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			System.out.println("¿À¶óÅ¬ µå¶óÀÌ¹ö¿¡ ¹«»çÈ÷ ¿¬°áµÇ¾ú½À´Ï´Ù.");
-		} catch (ClassNotFoundException e) {			
+			Context ctx = new InitialContext();
+			Context envContext=(Context)ctx.lookup("java:comp/env");
+			dataFactory = (DataSource) envContext.lookup("jdbc/oracle");
+			
+		} catch (NamingException e) {
 			e.printStackTrace();
-			throw new MyException("µå¶óÀÌ¹ö µî·Ï ¿À·ù");
+			throw new MyException("Find Resource Error : " + e);
 		}
+		
 	}
 	
 	public void memberInsert(Member m) throws MyException {
@@ -32,7 +50,7 @@ public class MemberDAO {
 			//3. Statement
 			stmt=con.prepareStatement("insert into newmember(memid,memname,subject,pw) values(?,?,?,?)");
 			
-			//4. SQLÀü¼Û
+			//4. SQLï¿½ï¿½ï¿½ï¿½
 			stmt.setString(1, m.getId());
 			stmt.setString(2, m.getName());
 			String subject="";
@@ -43,14 +61,14 @@ public class MemberDAO {
 			stmt.setString(4, m.getPw());
 			int i=stmt.executeUpdate();
 			
-			//5. °á°ú È®ÀÎ
-			System.out.println(i+"ÇàÀÌ insertµÇ¾ú½À´Ï´Ù");
+			//5. ï¿½ï¿½ï¿½ È®ï¿½ï¿½
+			System.out.println(i+"í–‰ì´ insertë˜ì—ˆìŠµë‹ˆë‹¤");
 			
 		} catch (SQLException e) {			
 			e.printStackTrace();
-			throw new MyException("È¸¿ø °¡ÀÔ ¿À·ù");
+			throw new MyException("íšŒì› ê°€ì… ì˜¤ë¥˜");
 		} finally {
-			//6. Á¾·á
+			//6. ï¿½ï¿½ï¿½ï¿½
 			try {
 				if(stmt!=null) stmt.close();
 				if(con!=null) con.close();
@@ -67,7 +85,7 @@ public class MemberDAO {
 		ResultSet rs = null;
 		try {
 			//2. Connection
-			con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "cafe", "1234");
+			con=dataFactory.getConnection();
 			
 			//3. Statement
 			stmt=con.prepareStatement("select * from newmember");
@@ -83,9 +101,9 @@ public class MemberDAO {
 			return list;
 		}catch(SQLException e) {
 			e.printStackTrace();
-			throw new MyException("¸ğµç °í°´ Á¶È¸ ½ÇÆĞ");
+			throw new MyException("ë¡œê·¸ì¸ ì‹¤íŒ¨");
 		}finally {
-			//6. Á¾·á
+			//6. ï¿½ï¿½ï¿½ï¿½
 			try {
 				if(rs!=null) rs.close();
 				if(stmt!=null) stmt.close();
@@ -100,18 +118,19 @@ public class MemberDAO {
 	public String login(String id, String pw) throws MyException {
 		
 		Connection con=null;
-		PreparedStatement stmt=null;
+		Statement stmt=null;
 		ResultSet rs=null;
 		try {
 			//2. Connection
-			con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "cafe", "1234");
+			con=dataFactory.getConnection();
 			
 			//3. Statement
-			stmt=con.prepareStatement("select * from member where newmemid=? and pw=?");
-			stmt.setString(1, id);
-			stmt.setString(2, pw);
+			stmt=con.createStatement();
 			
-			rs=stmt.executeQuery();
+//			((PreparedStatement) stmt).setString(1, id);
+//			((PreparedStatement) stmt).setString(2, pw);
+			
+			rs=stmt.executeQuery("select * from newmember where memid='"+id+"' and pw='"+pw+"' ");
 			if(rs.next()) {
 				
 				String name=rs.getString("memname");
@@ -121,9 +140,9 @@ public class MemberDAO {
 			return null;
 		}catch(SQLException e) {
 			e.printStackTrace();
-			throw new MyException("·Î±×ÀÎ ½ÇÆĞ");
+			throw new MyException("ë¡œê·¸ì¸ ì‹¤íŒ¨");
 		}finally {
-			//6. Á¾·á
+			//6. ï¿½ï¿½ï¿½ï¿½
 			try {
 				if(rs!=null) rs.close();
 				if(stmt!=null) stmt.close();
