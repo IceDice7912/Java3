@@ -14,7 +14,8 @@
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
   limitations under the License.
---><!-- The contents of this file will be loaded for each web application --><Context>
+--><!-- The contents of this file will be loaded for each web application -->
+<Context>
 
     <!-- Default set of monitored resources. If one of these changes, the    -->
     <!-- web application will be reloaded.                                   -->
@@ -26,4 +27,16 @@
     <!--
     <Manager pathname="" />
     -->
+    
+    <Resource
+    	name = "jdbc/oracle"
+    	auth = "Container"
+    	type = "javax.sql.DataSource"
+    	driverClassName="oracle.jdbc.driver.OracleDriver"
+    	url="jdbc:oracle:thin:@localhost:1521:XE"
+    	username = "CAFE"
+    	password = "1234"
+		maxActive = "4" 
+		maxWait = "-1" />
+    
 </Context>
