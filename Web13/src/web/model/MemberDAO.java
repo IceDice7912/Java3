@@ -45,7 +45,7 @@ public class MemberDAO {
 		PreparedStatement stmt=null;
 		try {
 			//2. Connection
-			con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "cafe", "1234");
+			con=dataFactory.getConnection();
 			
 			//3. Statement
 			stmt=con.prepareStatement("insert into newmember(memid,memname,subject,pw) values(?,?,?,?)");
@@ -116,21 +116,21 @@ public class MemberDAO {
 	}
 
 	public String login(String id, String pw) throws MyException {
+		System.out.println(id+":"+pw);
 		
 		Connection con=null;
-		Statement stmt=null;
+		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		try {
 			//2. Connection
 			con=dataFactory.getConnection();
 			
 			//3. Statement
-			stmt=con.createStatement();
+			stmt=con.prepareStatement("select * from newmember where memid=? and pw=? ");
+			stmt.setString(1, id);
+			stmt.setString(2, pw);
 			
-//			((PreparedStatement) stmt).setString(1, id);
-//			((PreparedStatement) stmt).setString(2, pw);
-			
-			rs=stmt.executeQuery("select * from newmember where memid='"+id+"' and pw='"+pw+"' ");
+			rs=stmt.executeQuery();
 			if(rs.next()) {
 				
 				String name=rs.getString("memname");
@@ -140,9 +140,9 @@ public class MemberDAO {
 			return null;
 		}catch(SQLException e) {
 			e.printStackTrace();
-			throw new MyException("로그인 실패");
+			throw new MyException("Login Fail");
 		}finally {
-			//6. ����
+			//6. 종료
 			try {
 				if(rs!=null) rs.close();
 				if(stmt!=null) stmt.close();
@@ -153,7 +153,42 @@ public class MemberDAO {
 		}
 		
 	}
+
+	
+	
+	public void deleteMember(String id) throws MyException {
+		Connection con=null;
+		PreparedStatement stmt=null;
+		try {
+			//2. Connection
+			con=dataFactory.getConnection();
+			
+			//3. Statement
+			stmt=con.prepareStatement("delete from newmember where memid=? ");
+			
+			//4. SQL전송
+			stmt.setString(1,id);	
+			
+			int i=stmt.executeUpdate();
+			
+			//5. 결과 확인
+			System.out.println(i+" delete");
+			
+		} catch (SQLException e) {			
+			e.printStackTrace();
+			throw new MyException("Error : " + e);
+		} finally {
+			//6. 종료
+			try {
+				if(stmt!=null) stmt.close();
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				
+			}
+		}
+	}
 }
+
 
 
 
