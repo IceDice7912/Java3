@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,6 +43,10 @@ public class MainServlet extends HttpServlet {
 				String pw=request.getParameter("pw");
 				String name=mDao.login(id,pw);
 				if(name!=null) {
+					//쿠기 설정
+					Cookie c = new Cookie ("login_name", name);
+					response.addCookie(name);
+					
 					RequestDispatcher disp=request.getRequestDispatcher("login_ok.jsp");
 					request.setAttribute("name", name);
 					disp.forward(request, response);
