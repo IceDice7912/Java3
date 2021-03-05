@@ -1,13 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>로그인 불러오기 성공</title>
-</head>
+    pageEncoding="UTF-8"    %>
+<%@ include file="header.html" %>
+
 <body>
-	${name } 님 화녕ㅇ합니다/ 
-	<br><a href='index.html'>돌아가기</a>
+	${name }님 환영합니다.<br>
+	<br><a href='index.html'>홈으로 가기</a>
+
 </body>
 </html>
+
+	<%--!
+    int i=10;
+	public void printI(){
+		System.out.println(i);
+	}
+	--%>
+	<%--= i++ --%>
+	<%--printI();--%>
