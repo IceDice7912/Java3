@@ -1,6 +1,7 @@
 package web.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -10,6 +11,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import web.model.MemberDAO;
 import web.util.Member;
@@ -44,8 +46,12 @@ public class MainServlet extends HttpServlet {
 				String name=mDao.login(id,pw);
 				if(name!=null) {
 					//쿠기 설정
-					Cookie c = new Cookie ("login_name", name);
-					response.addCookie(name);
+//					Cookie c = new Cookie ("login_name", name);
+//					c.setMaxAge(60*60);
+//					response.addCookie(c);
+					
+					HttpSession session = request.getSession();
+					session.setAttribute("login_name", name);
 					
 					RequestDispatcher disp=request.getRequestDispatcher("login_ok.jsp");
 					request.setAttribute("name", name);
@@ -73,9 +79,46 @@ public class MainServlet extends HttpServlet {
 				RequestDispatcher disp=request.getRequestDispatcher("memberDelete_ok.jsp");	
 				request.setAttribute("id", id);
 				disp.forward(request, response);
+			} else if (key.equalsIgnoreCase("basketInsert")) { //장바구니 삽입
+				HttpSession session = request.getSession(false);
+				if(session==null) {
+					RequestDispatcher disp=request.getRequestDispatcher("login.jsp");	
+					disp.forward(request, response);
+				} else {
+					String name=(String)session.getAttribute("login_name");
+					if (name==null) {
+					RequestDispatcher disp=request.getRequestDispatcher("login.jsp");	
+					disp.forward(request, response);	
+				} else	 {
+					String product=request.getParameter("product");
+					ArrayList<String> list=(ArrayList<String>)session.getAttribute("basket");
+					if(list==null) {
+						list = new ArrayList<String>();
+						session.setAttribute("basket", list);
+					}
+					list.add(product);
+					RequestDispatcher disp=request.getRequestDispatcher("basketInsert_ok.jsp");	
+					disp.forward(request, response);					
+				}
 			}
-			
-		}catch(MyException e) {
+		} else if (key.equalsIgnoreCase("basketView")) {
+			HttpSession session = request.getSession(false);
+			if(session==null) {
+				RequestDispatcher disp=request.getRequestDispatcher("login.jsp");	
+				disp.forward(request, response);
+			} else {
+				String name=(String)session.getAttribute("login_name");
+				if (name==null) {
+				RequestDispatcher disp=request.getRequestDispatcher("login.jsp");	
+				disp.forward(request, response);	
+			} else	 {
+				ArrayList<String> list = (ArrayList<String>)session.getAttribute("basket");
+				RequestDispatcher disp=request.getRequestDispatcher("basketView_ok.jsp");	
+				disp.forward(request, response);	
+				}
+			}
+		}
+	}	catch(MyException e) {
 			System.out.println("에러 발생 " + e);
 			RequestDispatcher disp=request.getRequestDispatcher("error.jsp");
 			disp.forward(request, response);
