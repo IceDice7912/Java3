@@ -1,48 +1,62 @@
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>인덱스 로그인창</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$("loginBtn").click(function(){
-			$.post("main", 
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#memberInsertFormBtn").click(function (){
+			alert("회원가입 씨발!!");
+			var v = "ID<input id='id'><br>PW<input type='password'><br><input type='button' value='회원가입' id='memberInsertBtn'>";
+			$("#mainDiv").html(v);
+		});
+		
+		$("#loginBtn").click(function(){	
+			$.post("main",
 				JSON.stringify({
-				sign:"login",
-				id:$("#id").val(),
-				pw:$("#pw").val()
-			})
-			,function(data, status){
+					sign:"login",
+					id:$("#id").val(),
+					pw:$("#pw").val()
+				})
+			,function(data,status){
 				var obj=JSON.parse(data);
-				if(obf.msg!=null){
-					alert(onj.msg);
-				} else {
+				console.log(obj);
+				if(obj.msg!=null ){
+					alert(obj.msg);
+				}else{
 					if(obj.name!=null){
-						$("#loginDiv").html(obj.name+"님의 아이디는 "+obj.id+"이고, 비밀번호는 "+obj.pw+" 입니다.")
-					} else{
-						alert("다시 로그인 해주세요.")
+						$("#loginDiv").html(obj.name+"님 환영합니다");
+						$("#mainDiv").html("즐거운 쇼핑 되세요.");
+					}else{
+						alert("다시 로그인 해주세요");
 					}
 				}
-				$("#loginDiv").html(obj.id+"님 환영하고, 비밀번호는 "+obj.pw+" 입니다.");
+				
 			});
 		});
 	});
-	</script>
+
+</script>
 </head>
 <body>
   <table border="1" width="600" height="500">
     <tr width="600" height="100"><td colspan="2"><img src='duke.gif' width="100" >
-    <h1 style='margin-left:50px;display:inline-block;'>Board</h1></td></tr>
+    <h1 style='margin-left:50px;display:inline-block;'>Board</h1>
+    <br><input type="button" value="회원가입" id="memberInsertFormBtn">
+    </td></tr>
      <tr>
     	<td width="150" height="350" align="center" valign="top">
     	<div id="loginDiv">    	    	      
     			ID <input type="text" size="10" name="id" id="id"> <br>
     			PW <input type="password" size="10" name="pw" id="pw"> <br>
-    			<input type="button" value="login"  id="loginBtn" />     		
+    			<input type="button" value="login" id="loginBtn" />     		
     	</div>
     	</td>
-    	<td></td>
+    	<td>
+    	<div id="mainDiv"></div>
+    	</td>
     </tr>
     <tr width="600" height="50"><td colspan="2" align="right">@Copyright by JES</td></tr>
   </table>

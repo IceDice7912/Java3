@@ -1,9 +1,11 @@
+
 package web.dao;
 
 import java.sql.*;
 
 import javax.naming.*;
 import javax.sql.DataSource;
+
 import web.util.MyException;
 
 public class MemberDAO {
@@ -22,19 +24,22 @@ public class MemberDAO {
 	
 	
 	public String login(String id,String pw) throws MyException {
+		System.out.println(id+":"+pw);
 		Connection con=null;
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		
 		try {
 			con=dbcp.getConnection();
-			stmt=con.prepareStatement("select memname from member where memid=? and pw=? ");
+			stmt=con.prepareStatement("select memname from newmember where memid=? and pw=? ");
 			stmt.setString(1, id);
 			stmt.setString(2, pw);
 			rs=stmt.executeQuery();
 			
 			if(rs.next()) {
-				return rs.getString(1);
+				String name=rs.getString(1);
+				System.out.println(name);
+				return name;
 			}
 			return null;
 		} catch (SQLException e) {			
@@ -51,4 +56,25 @@ public class MemberDAO {
 		}
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
