@@ -6,18 +6,21 @@
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
-	$(document).ready(function (){
-		$("loginBtn").click(function(){
-			$.post("main",
-			{
+$(document).ready(function (){
+	$("#loginBtn").click(function(){
+		$.post("main",
+			JSON.stringify({
 				sign:"login",
 				id:$("#id").val(),
 				pw:$("#pw").val()
-			} ,function(Msg, status){
-				$("#MsgDiv").html(Msg.id+"님 환영합니다.")
-			});
+		    })
+		,function(msg,status){
+			var obj=JSON.parse(msg);
+			$("#msgDiv").html(obj.id+"님의 비밀번호는 "+obj.pw+" 입니다.")
 		});
 	});
+});
+
 </script>
 </head>
 <body>
@@ -26,7 +29,7 @@
 		PW<input id="pw" type="password" name="pw"><br>
 		<input type="button" value="로그인" id="loginBtn" >
 		
-		<div id="MsgDiv">
+		<div id="msgDiv">
 			
 		</div>
 
