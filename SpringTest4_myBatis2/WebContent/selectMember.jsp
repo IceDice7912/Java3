@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
- ${name }님 로그인 되셨습니다
+<h3>찾은 고객 정보</h3>
+ ID : ${ memberVO.id}<br>
+ NAME : ${ memberVO.name}<br>
+ SUBJECT : ${ memberVO.subject}<br>
+ PW : ${ memberVO.pw}<br>
 </body>
 </html>

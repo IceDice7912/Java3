@@ -8,7 +8,7 @@
 		<result property="id" column="memid" />
 		<result property="pw" column="pw" />
 		<result property="name" column="memname" />
-		<result property="date" column="memdate" />
+		<result property="subject" column="subject" />
 	</resultMap>
 	
 	<select id="selectAllMemberList" resultMap="memResult">
@@ -25,13 +25,13 @@
 	
 	<select id="selectMemberById" resultMap="memResult" parameterType="String">
 		<![CDATA[
-			select * from member where memid=#{id}
+			select * from newmember where memid=#{id}
 		]]>
 	</select>
 	
 	<select id="selectMemberByPw" resultMap="memResult" parameterType="String">
 		<![CDATA[
-			select * from member where pw=#{pw}
+			select * from newmember where pw=#{pw}
 		]]>
 	</select>
 	

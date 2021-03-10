@@ -56,33 +56,28 @@ public class MainServlet extends HttpServlet {
 			request.setAttribute("name", name);
 			RequestDispatcher disp=request.getRequestDispatcher("login_ok.jsp");
 			disp.forward(request, response);
-		}	else if(sign.equals("name")) {
-			String name=request.getParameter("name");
-			MemberVO m=new MemberVO(name);
-			String name2=dao.login(m);
+		}else if(sign.equals("selectMemberById")) {
+			String id=request.getParameter("id");			
 			
-			request.setAttribute("name", name2);
-			RequestDispatcher disp=request.getRequestDispatcher("listMembers.jsp");
-			disp.forward(request, response);
-		}	else if(sign.equals("subject")) {
-			String subject=request.getParameter("subject");
-			MemberVO m=new MemberVO(subject);
-			String name2=dao.login(m);
+			MemberVO m=dao.selectMemberById(id);
 			
-			request.setAttribute("name", name2);
-			RequestDispatcher disp=request.getRequestDispatcher("listMembers.jsp");
+			request.setAttribute("memberVO", m);
+			RequestDispatcher disp=request.getRequestDispatcher("selectMember.jsp");
 			disp.forward(request, response);
-	}		else if(sign.equals("pw")) {
-			String pw=request.getParameter("pw");
-			MemberVO m=new MemberVO(pw);
-			String name2=dao.login(m);
-		
-			request.setAttribute("name", name2);
-			RequestDispatcher disp=request.getRequestDispatcher("listMembers.jsp");
+		}else if(sign.equals("selectMemberByPw")) {
+			String pw=request.getParameter("pw");			
+			
+			MemberVO m=dao.selectMemberByPw(pw);
+			
+			request.setAttribute("memberVO", m);
+			RequestDispatcher disp=request.getRequestDispatcher("selectMember.jsp");
 			disp.forward(request, response);
-		}
+		}	
+	
 	}
+
 }
+
 
 
 

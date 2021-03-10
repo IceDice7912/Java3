@@ -4,7 +4,9 @@ import java.util.Date;
 
 public class MemberVO {
 	
-	private String id, name, subject, pw;
+	private String id,pw,name,subject;
+	
+	
 		
 	public MemberVO(String id, String pw) {
 		super();
@@ -12,12 +14,12 @@ public class MemberVO {
 		this.pw = pw;
 	}
 
-	public MemberVO(String id, String pw, String sb, String pw1) {
+	public MemberVO(String id, String pw, String name, String subject) {
 		super();
 		this.id = id;
+		this.pw = pw;
 		this.name = name;
-		this.subject = sb;
-		this.pw = pw1;
+		this.subject = subject;
 	}
 	
 	public MemberVO() {
@@ -25,10 +27,6 @@ public class MemberVO {
 		// TODO Auto-generated constructor stub
 	}
 	
-
-	public MemberVO(String name2) {
-		// TODO Auto-generated constructor stub
-	}
 
 	public String getId() {
 		return id;
@@ -48,10 +46,17 @@ public class MemberVO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String pw() {
-		return pw;
+
+	public String getSubject() {
+		return subject;
 	}
-	public void setpw(String pw) {
-		this.pw = pw;
+
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
+
+	
+	
+	
+
 }

@@ -35,8 +35,47 @@ public class MemberDAO {
 		String name=(String) session.selectOne("mapper.member.login", m);
 		return name;
 	}
+	
+	public MemberVO selectMemberById(String id) {
+		SqlSession session=sqlMapper.openSession();
+		MemberVO m=(MemberVO) session.selectOne(
+				"mapper.member.selectMemberById", id);
+		return m;
+	}
+	
+	public MemberVO selectMemberByPw(String pw) {
+		SqlSession session=sqlMapper.openSession();
+		MemberVO m=(MemberVO) session.selectOne(
+				"mapper.member.selectMemberByPw", pw);
+		return m;
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
