@@ -9,8 +9,8 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-
-<listener>
+  
+  <listener>
   	<listener-class>
   		org.springframework.web.context.ContextLoaderListener
   	</listener-class>
@@ -19,13 +19,12 @@
   <context-param>
   	<param-name>contextConfigLocation</param-name>
   	<param-value>
-  		/WEB-INF/config/action-service.xml
-  		/WEB-INF/config/action-dataSource.xml
+  		/WEB-INF/a/action-service.xml,
+  		/WEB-INF/a/action-dataSource.xml
   	</param-value>
   </context-param>
-
-
-<servlet>
+  
+  <servlet>
   	<servlet-name>action</servlet-name>
   	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
   	<load-on-startup>1</load-on-startup>
@@ -35,7 +34,5 @@
   	<servlet-name>action</servlet-name>
   	<url-pattern>*.do</url-pattern>
   </servlet-mapping>
-
-
+  
 </web-app>
-

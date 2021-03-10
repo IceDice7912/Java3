@@ -11,7 +11,8 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 http://www.springframework.org/schema/context
 http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-<bean id="memberService" class="web.service.MemberServiceImpl">
-	<property name="memberDAO" ref="memberDAO"></property>
-</bean>
+	<bean id="memberService" class="web.service.MemberServiceImpl">
+		<property name="memberDAO" ref="memberDAO"></property>
+	</bean>
+
 </beans>
