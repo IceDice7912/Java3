@@ -5,6 +5,7 @@ import java.util.Date;
 public class MemberVO {
 	
 	private String id,pw,name,subject;
+	private Date date;
 	
 	
 		
@@ -14,12 +15,13 @@ public class MemberVO {
 		this.pw = pw;
 	}
 
-	public MemberVO(String id, String pw, String name, String subject) {
+	public MemberVO(String id, String pw, String name, String subject, Date date) {
 		super();
 		this.id = id;
 		this.pw = pw;
 		this.name = name;
-		this.subject = subject;
+		this.subject=subject;
+		this.date = date;
 	}
 	
 	public MemberVO() {
@@ -46,7 +48,9 @@ public class MemberVO {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
+	
+	
 	public String getSubject() {
 		return subject;
 	}
@@ -55,7 +59,17 @@ public class MemberVO {
 		this.subject = subject;
 	}
 
-	
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	@Override
+	public String toString() {
+		return "MemberVO [id=" + id + ", pw=" + pw + ", name=" + name + ", date=" + date + "subject=" + subject + "]";
+	}
 	
 	
 

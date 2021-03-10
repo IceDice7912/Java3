@@ -9,6 +9,7 @@
 		<result property="pw" column="pw" />
 		<result property="name" column="memname" />
 		<result property="subject" column="subject" />
+		<result property="date" column="memdate" />
 	</resultMap>
 	
 	<select id="selectAllMemberList" resultMap="memResult">
@@ -34,6 +35,21 @@
 			select * from newmember where pw=#{pw}
 		]]>
 	</select>
+	
+	<insert id="memberInsert"   parameterType="memberVO">
+		<![CDATA[
+			insert into member(memid,pw,memname,memdate) 
+			values(#{id},#{pw},#{name},#{date})
+		]]>
+	</insert>
+	
+	<update id="updateMember"  parameterType="memberVO" >
+		<![CDATA[
+			update member
+			set pw=#{pw}, name=#{name}
+			where id=#{id}
+		]]>
+	</update>
 	
 
 </mapper> 

@@ -50,6 +50,15 @@ public class MemberDAO {
 		return m;
 	}
 
+	public void memberInsert(MemberVO m) {
+		System.out.println(m);
+		SqlSession session=sqlMapper.openSession();
+	
+			int i=session.insert("mapper.member.memberInsert", m);
+			session.commit();
+	
+	}
+
 }
 
 

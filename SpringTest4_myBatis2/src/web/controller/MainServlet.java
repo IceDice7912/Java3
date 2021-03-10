@@ -1,6 +1,7 @@
 package web.controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -72,7 +73,20 @@ public class MainServlet extends HttpServlet {
 			request.setAttribute("memberVO", m);
 			RequestDispatcher disp=request.getRequestDispatcher("selectMember.jsp");
 			disp.forward(request, response);
-		}	
+		}else if(sign.equals("memberInsert")) {
+			String id=request.getParameter("id");
+			String pw=request.getParameter("pw");
+			String name=request.getParameter("name");
+			String subject=request.getParameter("subject");
+			
+			Date now=new Date();
+			MemberVO m=new MemberVO(id, pw, name, subject, now);
+			
+			dao.memberInsert(m);
+			
+			RequestDispatcher disp=request.getRequestDispatcher("index.html");
+			disp.forward(request, response);
+		}
 	
 	}
 
