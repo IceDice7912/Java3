@@ -37,6 +37,7 @@ public class MemberDAO {
 	}
 	
 	public MemberVO selectMemberById(String id) {
+		System.out.println("맴버 정렬 - 아이디");
 		SqlSession session=sqlMapper.openSession();
 		MemberVO m=(MemberVO) session.selectOne(
 				"mapper.member.selectMemberById", id);
@@ -44,6 +45,7 @@ public class MemberDAO {
 	}
 	
 	public MemberVO selectMemberByPw(String pw) {
+		System.out.println("맴버 정렬 - 비밀번호");
 		SqlSession session=sqlMapper.openSession();
 		MemberVO m=(MemberVO) session.selectOne(
 				"mapper.member.selectMemberByPw", pw);
@@ -51,10 +53,28 @@ public class MemberDAO {
 	}
 
 	public void memberInsert(MemberVO m) {
-		System.out.println(m);
+		System.out.println("맴버 등록 : " + m);
 		SqlSession session=sqlMapper.openSession();
 	
 			int i=session.insert("mapper.member.memberInsert", m);
+			session.commit();
+	
+	}
+	
+	public void updateMember(MemberVO m) {
+		System.out.println("맴버 업데이트 : " + m);
+		SqlSession session=sqlMapper.openSession();
+	
+			session.update("mapper.member.updateMember", m);
+			session.commit();
+	
+	}
+	
+	public void deleteMember(String id) {
+		System.out.println("맴버 죽임 : " + id);
+		SqlSession session=sqlMapper.openSession();
+	
+			session.delete("mapper.member.deleteMember", id);
 			session.commit();
 	
 	}

@@ -38,18 +38,24 @@
 	
 	<insert id="memberInsert"   parameterType="memberVO">
 		<![CDATA[
-			insert into member(memid,pw,memname,memdate) 
+			insert into newmember(memid,pw,memname,memdate) 
 			values(#{id},#{pw},#{name},#{date})
 		]]>
 	</insert>
 	
 	<update id="updateMember"  parameterType="memberVO" >
 		<![CDATA[
-			update member
-			set pw=#{pw}, name=#{name}
-			where id=#{id}
+			update newmember
+			set pw=#{pw}, memname=#{name}
+			where memid=#{id}
 		]]>
 	</update>
+	
+	<delete id="deleteMember" parameterType="String">
+		<![CDATA[
+			delete from newmember where memid=#{id}
+		]]>
+	</delete>
 	
 
 </mapper> 
