@@ -12,7 +12,8 @@ request.setCharacterEncoding("UTF-8");
 <head>
    <meta  charset="UTF-8">
    <title>회원 정보 출력창</title>
-<style>
+   
+   <style>
      .cls1 {
        font-size:40px;
        text-align:center;
@@ -23,10 +24,13 @@ request.setCharacterEncoding("UTF-8");
        text-align:center;
      }
   </style>
+
+				<form action = MemberController>
+				<input type = 'hidden' name = 'action' value = 'listMembers'>
   
 </head>
 <body>
- <p class="cls1">회원정보</p>
+	 <p class="cls1">회원정보</p>
    <table align="center" border="1" >
       <tr align="center" bgcolor="lightgreen">
          <td width="7%" ><b>아이디</b></td>
@@ -35,27 +39,27 @@ request.setCharacterEncoding("UTF-8");
          <td width="7%"><b>성별</b></td>
          <td width="7%" ><b>나이</b></td>
    </tr>
-
-<c:choose>
-    <c:when test="${empty membersList }" >
+   <c:choose>
+    <c:when test="${ empty membersList}" >
       <tr>
-        <td colspan=5 align="center">
-          <b>등록된 회원이 없습니다. 맴버 리스트를 받은 것이 없습니다.</b>
+        <td colspan="5" align="center">
+          <b>DB로부터 정보를 받는데 실패하였습니다.</b>
        </td>  
       </tr>
    </c:when>  
-   <c:when test="${!empty membersList }" >
+   <c:when test="${!empty membersList}" >
       <c:forEach  var="mem" items="${membersList }" >
         <tr align="center">
           <td>${mem.id }</td>
           <td>${mem.pw }</td>
           <td>${mem.name}</td>     
           <td>${mem.sex }</td>     
-          <td>${mem.age }</td>     
+          <td>${mem.age}</td>     
        </tr>
      </c:forEach>
-</c:when>
+     </c:when>
 </c:choose>
-   </table>  
+	</table>
+   <a href="index.html">홈으로 돌아가기</a>
 </body>
 </html>
