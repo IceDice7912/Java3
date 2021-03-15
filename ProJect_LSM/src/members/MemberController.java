@@ -31,8 +31,8 @@ public class MemberController extends HttpServlet {
 	private void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
-		List<MemberVO> memberList = memberDAO.listMembers();
-		request.setAttribute("memberList", memberList);
+		List<MemberVO> membersList = memberDAO.listMembers();
+		request.setAttribute("membersList", membersList);
 		RequestDispatcher dispatch = request.getRequestDispatcher("./listMembers.jsp");
 		dispatch.forward(request, response);
 	}

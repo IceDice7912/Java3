@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="ProJect_이상묵">
+        
+    <wb-module deploy-name="ProJect_LSM">
+                
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+                
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="ProJect_이상묵"/>
-        <property name="java-output-path" value="/ProJect_이상묵/build/classes"/>
+                
+        <property name="java-output-path" value="/ProJect_LSM/build/classes"/>
+        <property name="context-root" value="ProJect_LSM"/>
+            
     </wb-module>
+    
 </project-modules>

@@ -1,7 +1,6 @@
 package members;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,15 +19,16 @@ public class MemberDAO {
 	public MemberDAO() {
 		try {
 			Context ctx = new InitialContext();
-			Context envContext = (Context) ctx.lookup("java:/comp/env");
+			Context envContext = (Context) ctx.lookup("java:comp/env");
 			dataFactory = (DataSource) envContext.lookup("jdbc/oracle");
+			System.out.println("오라클 드라이버 접속 성공");
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("오라클 드라이버 접속 실패 : " + e);
 		}
 	}
 
 	public List<MemberVO> listMembers() {
-		List<MemberVO> membersList = new ArrayList();
+		List<MemberVO> membersList = new ArrayList<MemberVO>();
 		try {
 			conn = dataFactory.getConnection();
 			String query = "select * from member";
@@ -37,12 +37,13 @@ public class MemberDAO {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				String id = rs.getString("id");
-				String pwd = rs.getString("pwd");
+				String pw = rs.getString("pw");
 				String name = rs.getString("name");
 				String sex = rs.getString("sex");
 				int age = rs.getInt("age");
-				MemberVO memberVO = new MemberVO(id, pwd, name, sex, age);
+				MemberVO memberVO = new MemberVO(id, pw, name, sex, age);
 				membersList.add(memberVO);
+				System.out.println(id+" "+pw+" "+name+" "+sex+" "+age);
 			}
 			rs.close();
 			pstmt.close();

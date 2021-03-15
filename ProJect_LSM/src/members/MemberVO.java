@@ -1,25 +1,16 @@
 package members;
 
-import java.sql.Date;
-
 public class MemberVO {
 	private String id;
-	private String pwd;
+	private String pw;
 	private String name;
 	private String sex;
 	private int age;
 	
-	
-	public MemberVO() {
-		System.out.println("MemberVO 생성자 호출");
-	}
-
-
-
-	public MemberVO(String id, String pwd, String name, String sex, int age) {
+	public MemberVO(String id, String pw, String name, String sex, int age) {
 		super();
 		this.id = id;
-		this.pwd = pwd;
+		this.pw = pw;
 		this.name = name;
 		this.sex = sex;
 		this.age = age;
@@ -34,12 +25,12 @@ public class MemberVO {
 		this.id = id;
 	}
 
-	public String getPwd() {
-		return pwd;
+	public String getPw() {
+		return pw;
 	}
 
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
+	public void setPwd(String pw) {
+		this.pw = pw;
 	}
 
 	public String getName() {
