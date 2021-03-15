@@ -7,15 +7,11 @@
 <title>로그인창</title>
 </head>
 <body>
-
-				<form action = MemberController>
-				<input type = 'hidden' name = 'action' value = 'login'>
-
-	<form action="MemberController" method="post">
+	<form action="MemberController" method="get">
 		<input type="hidden" name="action" value="login">
 		ID <input name='id'><br>
 		PW <input type='password' name='pw'><br>
-		<input type="submit" value="login">
+		<input type="submit" value="로그인">
 	</form>
 </body>
 </html>

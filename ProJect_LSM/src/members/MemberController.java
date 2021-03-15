@@ -35,7 +35,7 @@ public class MemberController extends HttpServlet {
 		System.out.println("받은 액션 : " + action);
 		
 		if (action==null) {
-			RequestDispatcher dispatch = request.getRequestDispatcher("index.html");
+			RequestDispatcher dispatch = request.getRequestDispatcher("index.jsp");
 			dispatch.forward(request, response);
 			System.out.println("액션값이 null입니다. index로 돌아갑니다.");
 		}	else if(action.equalsIgnoreCase("listMembers")) {
@@ -53,15 +53,22 @@ public class MemberController extends HttpServlet {
 			MemberVO memberVO = new MemberVO(id, pw, name, sex, age);
 			memberDAO.addMember(memberVO);
 			System.out.println("맴버 등록을 완료했습니다. 인덱스로 돌아갑니다.");
-			RequestDispatcher dispatch = request.getRequestDispatcher("index.html");
+			RequestDispatcher dispatch = request.getRequestDispatcher("index.jsp");
 			dispatch.forward(request, response);
 		} else if (action.equalsIgnoreCase("login")) {
 			String id = request.getParameter("id");
 			String pw = request.getParameter("pw");
-			String name = request.getParameter("name");			
-			RequestDispatcher dispatch = request.getRequestDispatcher("index.html");
-			dispatch.forward(request, response);
-			System.out.println("로그인을 완료했습니다. 인덱스 화면으로 돌아갑니다. - " + name);	
+			String name=memberDAO.login(id,pw);		
+			if(name!=null) {						
+				RequestDispatcher disp=request.getRequestDispatcher("login.jsp");
+				request.setAttribute("name", name);
+				disp.forward(request, response);
+				System.out.println("로그인을 완료했습니다. 인덱스 화면으로 돌아갑니다. - " + name);	
+			}else {
+				System.out.println("login에 실패했습니다. 처음 화면으로 돌아갑니다.");
+				RequestDispatcher dispatch = request.getRequestDispatcher("index.jsp");
+				dispatch.forward(request, response);
+			}
 		}
 
 	}

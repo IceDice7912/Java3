@@ -76,18 +76,16 @@ public class MemberDAO {
 		}
 	}
 	
-	public String login(String id, String pw) 	{
-		Connection con=null;
-		PreparedStatement stmt=null;
+	public String login(String id, String pw) {
 		ResultSet rs=null;
-		DataSource dbcp = null;
 		
 		try {
-			con=dbcp.getConnection();
-			stmt=con.prepareStatement("select name from member where id=? and pw=? ");
-			stmt.setString(1, id);
-			stmt.setString(2, pw);
-			rs=stmt.executeQuery();
+			conn = dataFactory.getConnection();
+			pstmt= conn.prepareStatement("select name from member where id=? and pw=? ");
+			pstmt.setString(1, id);
+			pstmt.setString(2, pw);
+			System.out.println("로그인 시도하려는 아이디, 비밀번호 : " + id + ",  " + pw);
+			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				return rs.getString(1);
 			}
@@ -97,13 +95,13 @@ public class MemberDAO {
 		}finally {
 			try {
 				if(rs!=null) rs.close();
-				if(stmt!=null) stmt.close();
-				if(con!=null) con.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
 			} catch (SQLException e) {
 				System.out.println("에러 : " + e.getMessage());
 			}
 		}
-		return id;	
+		return null;	
 	}
 
 }
