@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	import=" java.util.*, members.*"
+	import=" java.util.*,web.controller.*"
 	pageEncoding="UTF-8"
 	isELIgnored="false" 
 %>
@@ -12,6 +12,20 @@ request.setCharacterEncoding("UTF-8");
 <head>
    <meta  charset="UTF-8">
    <title>회원 정보 출력창</title>
+  
+   		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<script src="js/jquery.min.js"><	/script>
+		<script src="js/jquery.dropotron.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+		<script>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-wide.css" />
+		</script>
    
    <style>
      .cls1 {
@@ -25,12 +39,14 @@ request.setCharacterEncoding("UTF-8");
      }
   </style>
 
-				<form action = MemberController>
+				<form action = Main>
 				<input type = 'hidden' name = 'action' value = 'listMembers'>
   
 </head>
 <body>
-	 <p class="cls1">회원정보</p>
+	<header class="major">
+	 <p class="cls1"><h2>Top 500 명예 회원</h2></p>
+	 </header>
    <table align="center" border="1" >
       <tr align="center" bgcolor="lightgreen">
          <td width="7%" ><b>아이디</b></td>
@@ -49,13 +65,15 @@ request.setCharacterEncoding("UTF-8");
    </c:when>  
    <c:when test="${!empty membersList}" >
       <c:forEach  var="mem" items="${membersList }" >
+      			<div class="container">
         <tr align="center">
           <td>${mem.id }</td>
-          <td>${mem.pw }</td>
+          <td>****</td>
           <td>${mem.name}</td>     
           <td>${mem.sex }</td>     
           <td>${mem.age}</td>     
        </tr>
+       			</div>
      </c:forEach>
      </c:when>
 </c:choose>

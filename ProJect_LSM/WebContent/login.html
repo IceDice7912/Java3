@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<script type="text/javascript">
+	function fn_validate() {
+		var frmLogin = document.frmLogin;
+		var user_id = frmLogin.id.value;
+		var user_pw = frmLogin.pw.value;
+		if((user_id.length==0 || user_id == "") || (user_pw.length == 0 || user_pw == "")) {
+			alert('아이디와 비밀번호는 필수입니다.');
+		} else {
+			alert(user_id + ' ' + user_pw);
+			frmLogin.submit();
+		}
+	}
+</script>
+
+<title>로그인창</title>
+</head>
+<body>
+
+	<form name="frmLogin" action="Main" method="post">
+	<input type="hidden" name="action" value="login">
+	아이디와 비밀번호를 입력하세요<br>
+		ID <input name='id'><br>
+		PW <input type='password' name='pw'><br>
+	<input type="button" onClick='fn_validate()' value="로그인하기">
+	</form>
+</body>
+</html>

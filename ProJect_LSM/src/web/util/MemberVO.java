@@ -1,4 +1,4 @@
-package members;
+package web.util;
 
 public class MemberVO {
 	private String id;
@@ -29,7 +29,7 @@ public class MemberVO {
 		return pw;
 	}
 
-	public void setPwd(String pw) {
+	public void setPw(String pw) {
 		this.pw = pw;
 	}
 
