@@ -47,7 +47,7 @@ public class MemberController extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		String action = request.getParameter("action");
 		System.out.println("받은 액션 : " + action);
-		
+		PrintWriter out = response.getWriter();	
 		
 		if (action==null) {
 			RequestDispatcher dispatch = request.getRequestDispatcher("index.html");
@@ -84,14 +84,13 @@ public class MemberController extends HttpServlet {
 			System.out.println("받은 비번 : " + pw);
 			System.out.println("산출 이름 : " + name);
 			if(name!=null) {
-				RequestDispatcher disp=request.getRequestDispatcher("login_ok.jsp");
+				RequestDispatcher disp=request.getRequestDispatcher("login-ok.html");
 				request.setAttribute("name", name);
 				disp.forward(request, response);
-				System.out.println("로그인에 성공했습니다 : " + name);
+				
 			}else {
-				RequestDispatcher disp=request.getRequestDispatcher("login_fail.jsp");
+				RequestDispatcher disp=request.getRequestDispatcher("login-fail.html");
 				disp.forward(request, response);
-				System.out.println("로그인에 실패했습니다 : " + name);
 			}
 		} //로그인
 		

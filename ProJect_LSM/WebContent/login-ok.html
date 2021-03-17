@@ -16,26 +16,7 @@
 		<script src="js/skel.min.js"></script>
 		<script src="js/skel-layers.min.js"></script>
 		<script src="js/init.js"></script>
-		<noscript>
-			<link rel="stylesheet" href="css/skel.css" />
-			<link rel="stylesheet" href="css/style.css" />
-			<link rel="stylesheet" href="css/style-wide.css" />
-		</noscript>
 		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
-		
-		<script type="text/javascript">
-	function fn_validate() {
-		var frmLogin = document.frmLogin;
-		var user_id = frmLogin.id.value;
-		var user_pw = frmLogin.pw.value;
-		if((user_id.length==0 || user_id == "") || (user_pw.length == 0 || user_pw == "")) {
-			alert('아이디와 비밀번호는 필수입니다.');
-		} else {
-			alert(user_id + ' ' + user_pw);
-			frmLogin.submit();
-		}
-	}
-</script>
 		
 	</head>
 	<body>
@@ -52,22 +33,17 @@
 							<ul>
 								<li class="active"><a href="index.html">Homepage</a></li>
 								<li><a href="Main?action=listMembers">회원 목록 보기</a></li>
-								<li><a href="right-sidebar.html">회원 가입 하기</a></li>
+								<li><a href="memberInsert.html">회원 가입 하기</a></li>
 								<li><a href="no-sidebar.html">로그인 하기</a></li>
 							</ul>
 						</nav>
 					</div>
-				<!-- Header -->
-
-				<!-- Page -->
-					<div id="page" class="container">
-	<form name="frmLogin" action="Main" method="post">
-	<input type="hidden" name="action" value="login">
-	아이디와 비밀번호를 입력하세요<br>
-		ID <input name='id'><br>
-		PW <input type='password' name='pw'><br>
-	<input type="button" onClick='fn_validate()' value="로그인하기">
+				
+	
+	
+	<br><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 로그인에 성공했습니다.
+	<br>
 	</form>
-
 	</body>
 </html>

@@ -12,7 +12,6 @@ request.setCharacterEncoding("UTF-8");
 <head>
    <meta  charset="UTF-8">
    <title>회원 정보 출력창</title>
-  
    		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
@@ -25,8 +24,7 @@ request.setCharacterEncoding("UTF-8");
 			<link rel="stylesheet" href="css/skel.css" />
 			<link rel="stylesheet" href="css/style.css" />
 			<link rel="stylesheet" href="css/style-wide.css" />
-		</script>
-   
+		</script> 
    <style>
      .cls1 {
        font-size:40px;
@@ -38,12 +36,31 @@ request.setCharacterEncoding("UTF-8");
        text-align:center;
      }
   </style>
-
 				<form action = Main>
 				<input type = 'hidden' name = 'action' value = 'listMembers'>
   
 </head>
 <body>
+
+		<!-- Wrapper -->
+			<div class="wrapper style1">
+
+				<!-- Header -->
+					<div id="header" class="skel-panels-fixed">
+						<div id="logo">
+							<h1><a href="index.html">영화 무료 다운로드</a></h1>
+							<span class="tag">by IceDice</span>
+						</div>
+						<nav id="nav">
+							<ul>
+								<li class="active"><a href="index.html">Homepage</a></li>
+								<li><a href="Main?action=listMembers">회원 목록 보기</a></li>
+								<li><a href="memberInsert.html">회원 가입 하기</a></li>
+								<li><a href="login.html">로그인 하기</a></li>
+							</ul>
+						</nav>
+					</div>
+
 	<header class="major">
 	 <p class="cls1"><h2>Top 500 명예 회원</h2></p>
 	 </header>
@@ -55,7 +72,7 @@ request.setCharacterEncoding("UTF-8");
          <td width="7%"><b>성별</b></td>
          <td width="7%" ><b>나이</b></td>
    </tr>
-   <c:choose>
+ <c:choose>
     <c:when test="${ empty membersList}" >
       <tr>
         <td colspan="5" align="center">
