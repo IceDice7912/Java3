@@ -82,6 +82,7 @@ public class MemberDAO {
 			pstmt.setString(3, name);	
 			pstmt.setString(4, sex);
 			pstmt.setInt(5, age);
+			System.out.println("받아서 등록하려는 age값 : " + age);
 			pstmt.executeUpdate();
 			pstmt.close();
 			conn.close();
@@ -106,8 +107,8 @@ public class MemberDAO {
 				System.out.println("받은 rs.getString1 값 : " + rs.getString(1));
 				return rs.getString(1);
 			} else {
-			System.out.println("result set에 값이 없습니다. null을 리턴합니다.");
-			return null;
+			System.out.println("result set에 값이 없습니다. 임시 아이디 'Admin'을 리턴합니다.");
+			return "Admin";
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();

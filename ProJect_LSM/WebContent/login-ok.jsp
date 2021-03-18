@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-<title>로그인창</title>
+<title>Log-on</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
@@ -32,9 +32,8 @@
 						<nav id="nav">
 							<ul>
 								<li class="active"><a href="index-logon.html">Homepage</a></li>
-								<li><a href="Main?action=listMembers">회원 목록 보기</a></li>
-								<li><a href="memberDelete.html">회원 탈퇴</a></li>
-								<li><a href="index.html">로그아웃</a></li>
+								<li><a href="Main?action=listMembers">MemberList</a></li>
+								<li><a href="index.html">LogOut</a></li>
 							</ul>
 						</nav>
 					</div>
@@ -42,8 +41,11 @@
 	
 	
 	<br><br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 로그인에 성공했습니다.<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="index-logon.html">홈페이지로 이동</a>
+<body>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${name } sir, Welcome.<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href='index-logon.html'>Go home</a><br>
+</body>
+</html>
 	<br>
 	</form>
 	</body>

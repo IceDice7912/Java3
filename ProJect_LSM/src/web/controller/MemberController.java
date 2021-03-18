@@ -63,13 +63,22 @@ public class MemberController extends HttpServlet {
 		System.out.println("listMember 액션을 받았습니다. 맴버들을 출력합니다.");
 		} //맴버 출력
 		
+		else if(action.equalsIgnoreCase("listMembers-logon")) {
+		List<MemberVO> membersList = memberDAO.listMembers();
+		request.setAttribute("membersList", membersList);
+		RequestDispatcher dispatch = request.getRequestDispatcher("memberList-logon.jsp");
+		dispatch.forward(request, response);
+		System.out.println("listMember 액션을 받았습니다. 맴버들을 출력합니다.");
+		} //맴버 출력-로그인 상태
+		
 		else if (action.equalsIgnoreCase("addMember")) {
 			String id = request.getParameter("id");
 			String pw = request.getParameter("pw");
 			String name = request.getParameter("name");
 			String sex = request.getParameter("sex");
-			int age = request.getIntHeader("age");
+			int age = Integer.parseInt(request.getParameter("age"));
 			MemberVO memberVO = new MemberVO(id, pw, name, sex, age);
+			System.out.println("controller - vo로부터 건네받은 age값 : " + age);
 			memberDAO.addMember(memberVO);
 			System.out.println("맴버 등록을 완료했습니다. 인덱스로 돌아갑니다.");
 			RequestDispatcher dispatch = request.getRequestDispatcher("index.html");
@@ -84,10 +93,10 @@ public class MemberController extends HttpServlet {
 			System.out.println("받은 비번 : " + pw);
 			System.out.println("산출 이름 : " + name);
 			if(name!=null) {
-				RequestDispatcher disp=request.getRequestDispatcher("login-ok.html");
+				RequestDispatcher disp=request.getRequestDispatcher("index-logon.jsp");
 				request.setAttribute("name", name);
 				disp.forward(request, response);
-				
+				out.append("#namehere").println(name+"sir, welcome");
 			}else {
 				RequestDispatcher disp=request.getRequestDispatcher("login-fail.html");
 				disp.forward(request, response);

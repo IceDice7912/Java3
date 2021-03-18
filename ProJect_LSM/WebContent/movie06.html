@@ -1,12 +1,9 @@
-<!DOCTYPE HTML>
-<!--
-	Phase Shift by TEMPLATED
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
+<!DOCTYPE html>
 <html>
-	<head>
-<title>로그인창</title>
+<head>
+<meta charset="UTF-8" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8">
+<title>Home</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
@@ -16,23 +13,14 @@
 		<script src="js/skel.min.js"></script>
 		<script src="js/skel-layers.min.js"></script>
 		<script src="js/init.js"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-wide.css" />
+		</noscript>
 		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
-		
-<script type="text/javascript">
-	function fn_validate() {
-		var frmLogin = document.frmLogin;
-		var user_id = frmLogin.id.value;
-		var user_pw = frmLogin.pw.value;
-		if((user_id.length==0 || user_id == "") || (user_pw.length == 0 || user_pw == "")) {
-			alert('아이디와 비밀번호는 필수입니다.');
-		} else {
-			frmLogin.submit();
-		}
-	}
-</script>
-		
-	</head>
-	<body>
+</head>
+<body>
 		<!-- Wrapper -->
 			<div class="wrapper style1">
 
@@ -51,16 +39,20 @@
 							</ul>
 						</nav>
 					</div>
-				
-	<form name="frmLogin" action="Main" method="post">
-	<input type="hidden" name="action" value="login">
-	<h1><font size="15">아이디와 비밀번호를 입력하세요<br><br></font></h1>
-		ID <input type="text" name='id' style="color:black;"><br>
-		PW <input type='password' name='pw' style="color:black;"><br>
-	<input type="button" onClick='fn_validate()' value="로그인하기">
-	<br><br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 로그인에 실패했습니다. 없는 아이디입니다.
-	<br>
-	</form>
-	</body>
-</html>
+
+				<!-- Extra -->
+					<div id="extra">
+						<div class="container">
+							<div class="row no-collapse-1">
+								<section class="4u"> <a href="#" class="image featured"><img src="images/pic06.jpg" alt=""></a>
+									<div class="box">
+										<p><font color="Black">누아르 영화(프랑스어: film noir 필름 누아르[film nwaʁ][*])는 범죄와 폭력을 다루면서, 도덕적 모호함이나 성적 동기에 초점을 맞추는 일군의 영화를 가리킨다.</font></p>
+								</section>
+							</div>
+						</div>
+					</div>
+					
+					
+					
+					
+</body>

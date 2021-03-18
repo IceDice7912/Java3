@@ -53,8 +53,8 @@ public class MemberVO {
 		return age;
 	}
 
-	public void setAge(int age) {
-		this.age = age;
+	public int setAge(int age) {
+		return this.age = age;
 	}
 
 	
