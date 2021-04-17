@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+ <html>
+  <head>
+  <meta charset="UTF-8">
+  </head>
+4조 인덱스 홈페이지-php라는 이름으로 되는지 실험-ㅗ안된다
+<body>
+	<br>
+	<img src="http://img.hankyung.com/photo/201812/AA.18550512.1.jpg"/>
+	<br>
+
+<?php
+$servername = "54.83.91.161";
+$username = "shotting";
+$password = "1234";
+$dbname = "member";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+$sql = "SELECT * FROM Member";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        echo $row["NAME"]. " - " . $row["ID"]. " - " . $row["PW"]. " - " . $row["GENDER"]. " - " . $row["AGE"]. " - " . $row["EMAIL"]. " - " . $row["ADDRESS"]. " - " . $row["FAVORITE"]. " - " . $row["JOB"] "<br>";
+    }
+} else {
+    echo "0 results";
+}
+
+$conn->close();
+?>
+
+<button href="test.java">자바 테스트</button>
+<button href="https://www.naver.com/">네이버로 가기</button>
+
+
+</body>
+</html>
